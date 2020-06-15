@@ -1,11 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Descriptions } from 'antd';
+import React, {Fragment} from 'react';
+import { Descriptions, Button } from 'antd';
 
-const UserRegistrationInfo = (props) => {
-  const { firstName, lastName, email, prefix, phone } = props.registrationForm;
+const UserRegistrationInfo = ({
+  registrationForm,
+  onLogout
+}) => {
+  const { firstName, lastName, email, prefix, phone } = registrationForm;
   return (
+    <Fragment>
     <Descriptions title="User Info">
       <Descriptions.Item label="First name" span={2}>
         {firstName}
@@ -21,14 +23,12 @@ const UserRegistrationInfo = (props) => {
         {phone}
       </Descriptions.Item>
     </Descriptions>
+    <Button type="primary" onClick={onLogout}>
+      Logout
+    </Button>
+    </Fragment>
   );
 };
 
-const mapStateToProps = (state) => {
-  debugger;
-  return {
-    registrationForm: state.registrationForm,
-  };
-};
 
-export default connect(mapStateToProps)(UserRegistrationInfo);
+export default UserRegistrationInfo;
